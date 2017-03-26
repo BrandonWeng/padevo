@@ -28,3 +28,9 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+#configureation for MongoDb
+config
+
+#intelliji 
+padevo.iml
