@@ -6,6 +6,11 @@
 var request = require('request');
 var fs = require('fs');
 
+var mongoose = require('mongoose');
+var config = require('./config');
+mongoose.connect(config.dbConfig());
+var Monsters = require('./model/monstersModel')
+
 var url = 'https://www.padherder.com/'
 
 // Make's an GET request to url and get a lit of monsters
@@ -42,21 +47,31 @@ function store(evolutions,NAmonsters){
         var m = {
             name : monster.name,
             id : monster.id.toString(),
+            materials : {}
         }
+        function getMats(addToDB){
+            getAllMats(m.id,evolutions,m.materials)
+            addToDB(m)
+        }
+
+        getMats(addToDB)
     });
 
-    var materials = {};
-    getAllMats('3266',evolutions,materials)
+    console.log("Stored");
+}
 
-    console.log(materials)
-    console.log("Stored")
+function addToDB(monster) {
+    Monsters.create(monster, function (err, res) {
+        if (err) console.log("ERROR " + err)
+        else console.log(res)
+    });
 }
 
 function getAllMats(id,evolutions,materials) {
 
     // Check if this is the most basic stage
     // if so, end search
-    if (evolutions[id] == undefined) {
+    if (evolutions[id] == undefined || evolutions[id][0] == undefined) {
         cantUnEvo(id,evolutions,materials)
         return;
     }
@@ -66,7 +81,7 @@ function getAllMats(id,evolutions,materials) {
 
     // Check if there's no evolution available,
     // if not, end search
-    if (idEvoMat == undefined) return;
+    if (idEvoMat== undefined) return;
 
     // If this is not the most basic evolution, recursively call
     // getAllMats on the previous stage of evolution
@@ -76,6 +91,8 @@ function getAllMats(id,evolutions,materials) {
 
         // if there's more than one path, search for the one
         // that leads to the desired stage, then set IdEvoMat as that
+
+        if (evolutions[evoFrom] == undefined) return;
         evolutions[evoFrom].forEach(function(mat){
             if (mat.evolves_to == id){
                 idEvoMat = mat.materials
@@ -100,7 +117,13 @@ function getAllMats(id,evolutions,materials) {
 function canUnEvo(materials){
     // Compare each material to check if there is a path that leads to
     // the current node
-    return materials[0][0] == 155 && materials[1][0] == 156 && materials[2][0] == 157
+    if (materials[1] == undefined
+        || materials[0] == undefined
+        || materials[2] == undefined
+        || materials[3] == undefined
+        || materials[4] == undefined) return false;
+
+    else return materials[0][0] == 155 && materials[1][0] == 156 && materials[2][0] == 157
         materials[3][0] == 158 && materials[4][0] == 159 ;
 }
 
@@ -120,13 +143,11 @@ function cantUnEvo(id,evolutions,materials){
 }
 
 // used to download images of all evolution materials
-var download = function(uri, filename, callback){
+var download = function(url, filename, callback){
     var path = "./public/images/";
 
-    request.head(uri, function(err, res, body){
-        console.log('content-type:', res.headers['content-type']);
-        console.log('content-length:', res.headers['content-length']);
-        request(uri).pipe(fs.createWriteStream(path+filename)).on('close', callback);
+    request.head(url, function(err, res, body){
+        request(url).pipe(fs.createWriteStream(path+filename)).on('close', callback);
     });
 };
 
