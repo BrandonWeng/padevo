@@ -5,6 +5,7 @@
 
 var request = require('request');
 var fs = require('fs');
+var https = require('https');
 
 var mongoose = require('mongoose');
 var config = require('./config');
@@ -151,10 +152,28 @@ var download = function(url, filename, callback){
     });
 };
 
+function downloadImages() {
+    request(url + 'api/monsters/', function (err, res, body) {
+        if (err) console.log("ERROR ", err);
+        var response = JSON.parse(body);
+
+        response.forEach(function (monster) {
+            if (monster && monster.image40_href) {
+                download(url + monster.image40_href, monster.id + ".png", function (err, res) {
+                    if (err) console.log(`ERROR downloading ${id}`)
+                });
+            }
+        });
+
+        console.log("downloaded!");
+    });
+}
+
 /*
 download( url + '/static/img/monsters/40x40/1087.86c7840800d0.png', 'google.png', function(){
     console.log('done');
 });
 */
 
-getUSmonsters(getEvolutions)
+//getUSmonsters(getEvolutions)
+downloadImages()
