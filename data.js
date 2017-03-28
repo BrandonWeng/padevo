@@ -2,7 +2,9 @@
  * Created by Brandon on 2017-03-25.
  */
 
+// THIS FILE SHOULD BE RAN EVERY TIME THERE"S AN UPDATE
 
+    // REQUIRE MODULES AND SET UP
 var request = require('request');
 var fs = require('fs');
 var https = require('https');
@@ -11,6 +13,9 @@ var mongoose = require('mongoose');
 var config = require('./config');
 mongoose.connect(config.dbConfig());
 var Monsters = require('./model/monstersModel')
+
+// ----------------------------------------
+
 
 var url = 'https://www.padherder.com/'
 
@@ -33,6 +38,7 @@ function getUSmonsters(getEvolutions) {
     });
 }
 
+// Get evolutions by making API HTTP GET request
 function getEvolutions(NAmonsters) {
     request(url + 'api/evolutions/', function (err, res, body) {
         if (err) console.log("ERROR ", err);
@@ -42,6 +48,9 @@ function getEvolutions(NAmonsters) {
     });
 }
 
+
+// Prases the two objects recieved from HTTP request and parse
+// them into desired format (schema) then stored into DB
 function store(evolutions,NAmonsters){
 
     NAmonsters.forEach(function(monster){
@@ -61,6 +70,7 @@ function store(evolutions,NAmonsters){
     console.log("Stored");
 }
 
+// Funciton used to store monster into db
 function addToDB(monster) {
     Monsters.create(monster, function (err, res) {
         if (err) console.log("ERROR " + err)
@@ -68,19 +78,24 @@ function addToDB(monster) {
     });
 }
 
+//
 function getMat(id, evolutions, materials){
 
+    // Iterate through every key and look for the path
+    // that leads directly to ID
     Object.keys(evolutions).forEach(function (key) {
         var evos = evolutions[key];
 
+        // Check each path of evolution
         evos.forEach(function(val){
 
             // NOTE:: 2978 is bugged ! dont store this (make sure to check this specifically later for front end)
             if (val != undefined && val.evolves_to == id && !allLits(val.materials)  && id != "2978") {
 
+                // Check each material(s) and increment count
                 val.materials.forEach(function (mat) {
 
-                    var matID = mat[0];
+                    var matID = mat[0]
                     var matCount = mat[1];
 
                     // If the material is not yet counted
@@ -96,13 +111,13 @@ function getMat(id, evolutions, materials){
                 // Check the if there's previous evolutions and add their material counts
                 getMat(key,evolutions,materials)
             }
-
         });
-
     });
 }
 
-
+// used to check if the current set of materials is all lits (used to unevolve monster)
+// if so, return true, else return false.
+// this is used to avoid counting the lits in the list of materials requried
 function allLits(materials){
 
     // Compare each material to check if there is a path that leads to
@@ -112,6 +127,7 @@ function allLits(materials){
         || materials[2] == undefined
         || materials[3] == undefined
         || materials[4] == undefined) return false;
+
     // Return check if all the materials are all lits
     else return materials[0][0] == 155 && materials[1][0] == 156 && materials[2][0] == 157
         materials[3][0] == 158 && materials[4][0] == 159 ;
@@ -119,6 +135,7 @@ function allLits(materials){
 
 
 
+/*
 // used to download images of all evolution materials
 var download = function(url, filename, callback){
     var path = "./public/images/";
@@ -147,7 +164,7 @@ function downloadImages() {
     });
 }
 
-
+//downloadImages()
+*/
 
 getUSmonsters(getEvolutions)
-//downloadImages()
