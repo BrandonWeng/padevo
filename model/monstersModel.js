@@ -7,7 +7,7 @@ var Schema = mongoose.Schema
 
 var monsterSchema = new Schema({
     id : String,
-    monster : String,
+    name : String,
     materials : Schema.Types.Mixed
 });
 

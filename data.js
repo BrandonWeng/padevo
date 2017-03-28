@@ -51,7 +51,7 @@ function store(evolutions,NAmonsters){
             materials : {}
         }
         function getMats(addToDB){
-            getAllMats(m.id,evolutions,m.materials)
+            getMat(m.id,evolutions,m.materials)
             addToDB(m)
         }
 
@@ -68,54 +68,43 @@ function addToDB(monster) {
     });
 }
 
-function getAllMats(id,evolutions,materials) {
+function getMat(id, evolutions, materials){
 
-    // Check if this is the most basic stage
-    // if so, end search
-    if (evolutions[id] == undefined || evolutions[id][0] == undefined) {
-        cantUnEvo(id,evolutions,materials)
-        return;
-    }
+    Object.keys(evolutions).forEach(function (key) {
+        var evos = evolutions[key];
 
-    var idEvoMat = evolutions[id][0].materials;
-    var evoFrom = evolutions[id][0].evolves_to;
+        evos.forEach(function(val){
 
-    // Check if there's no evolution available,
-    // if not, end search
-    if (idEvoMat== undefined) return;
+            // NOTE:: 2978 is bugged ! dont store this (make sure to check this specifically later for front end)
+            if (val != undefined && val.evolves_to == id && !allLits(val.materials)  && id != "2978") {
 
-    // If this is not the most basic evolution, recursively call
-    // getAllMats on the previous stage of evolution
-    if (canUnEvo(idEvoMat)) {
+                val.materials.forEach(function (mat) {
 
-        getAllMats(evoFrom,evolutions,materials)
+                    var matID = mat[0];
+                    var matCount = mat[1];
 
-        // if there's more than one path, search for the one
-        // that leads to the desired stage, then set IdEvoMat as that
+                    // If the material is not yet counted
+                    if (materials[matID] == undefined) materials[matID] = matCount;
+                    // Material was already counted, increase the count
+                    else materials[matID] = materials[matID] + matCount;
 
-        if (evolutions[evoFrom] == undefined) return;
-        evolutions[evoFrom].forEach(function(mat){
-            if (mat.evolves_to == id){
-                idEvoMat = mat.materials
+                    // Recurse and calculate materials required for all children nodes
+                    if (evolutions[matID] != undefined) getMat(matID,evolutions,materials);
+
+                });
+
+                // Check the if there's previous evolutions and add their material counts
+                getMat(key,evolutions,materials)
             }
+
         });
 
-        // Look for the materials required for the current level to
-        // reach the desired level
-        idEvoMat.forEach(function (mat) {
-            if (materials[mat[0]] == undefined) materials[mat[0]] = mat[1];
-            else materials[mat[0]] = materials[mat[0]] + mat[1];
-            getAllMats(mat[0], evolutions, materials)
-        });
-
-    } else {
-        if (materials[id] == undefined) materials[id] = 1;
-        else materials[id] = materials[id] + 1;
-    }
-
+    });
 }
 
-function canUnEvo(materials){
+
+function allLits(materials){
+
     // Compare each material to check if there is a path that leads to
     // the current node
     if (materials[1] == undefined
@@ -123,25 +112,12 @@ function canUnEvo(materials){
         || materials[2] == undefined
         || materials[3] == undefined
         || materials[4] == undefined) return false;
-
+    // Return check if all the materials are all lits
     else return materials[0][0] == 155 && materials[1][0] == 156 && materials[2][0] == 157
         materials[3][0] == 158 && materials[4][0] == 159 ;
 }
 
-function cantUnEvo(id,evolutions,materials){
 
-    Object.keys(evolutions).forEach(function (key) {
-        var val = evolutions[key][0];
-
-        if (val != undefined && val.evolves_to == id) {
-            val.materials.forEach(function (mat) {
-                if (materials[mat[0]] == undefined) materials[mat[0]] = mat[1];
-                else materials[mat[0]] = materials[mat[0]] + mat[1];
-            });
-        }
-
-    });
-}
 
 // used to download images of all evolution materials
 var download = function(url, filename, callback){
@@ -152,6 +128,8 @@ var download = function(url, filename, callback){
     });
 };
 
+// Function that download images - note only download 600 at a time to avoid images
+// bugging (zero byte err)
 function downloadImages() {
     request(url + 'api/monsters/', function (err, res, body) {
         if (err) console.log("ERROR ", err);
@@ -169,11 +147,7 @@ function downloadImages() {
     });
 }
 
-/*
-download( url + '/static/img/monsters/40x40/1087.86c7840800d0.png', 'google.png', function(){
-    console.log('done');
-});
-*/
 
-//getUSmonsters(getEvolutions)
-downloadImages()
+
+getUSmonsters(getEvolutions)
+//downloadImages()
