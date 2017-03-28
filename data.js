@@ -158,10 +158,10 @@ function downloadImages() {
         var response = JSON.parse(body);
 
         response.forEach(function (monster) {
-            if (monster && monster.image40_href) {
+            if (monster && monster.image40_href && monster.id <= 3800 && monster.id >= 3200) {
                 download(url + monster.image40_href, monster.id + ".png", function (err, res) {
                     if (err) console.log(`ERROR downloading ${id}`)
-                });
+                })
             }
         });
 
