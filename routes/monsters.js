@@ -1,10 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var Monsters = require('../model/monstersModel')
+
+var mongoose = require('mongoose');
+var config = require('../config');
+mongoose.connect(config.dbConfig());
+var db = require('../model/monstersModel')
 
 /* GETS MONSTER ID */
 router.get('/:id',function(req,res,next){
-    res.render('index', { title: req.params.id,me:"Testing" });
+    db.findOne({id:req.params.id},function (err,docs){
+        if (err) throw err;
+        else console.log(docs);
+        res.render('monster.jade', { title: docs.name, monster:docs.materials });
+    }
+    );
+
 });
 
 module.exports = router;

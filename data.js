@@ -70,7 +70,7 @@ function store(evolutions,NAmonsters){
     console.log("Stored");
 }
 
-// Funciton used to store monster into db
+// Funciton used to store monster.jade into db
 function addToDB(monster) {
     Monsters.create(monster, function (err, res) {
         if (err) console.log("ERROR " + err)
@@ -115,7 +115,7 @@ function getMat(id, evolutions, materials){
     });
 }
 
-// used to check if the current set of materials is all lits (used to unevolve monster)
+// used to check if the current set of materials is all lits (used to unevolve monster.jade)
 // if so, return true, else return false.
 // this is used to avoid counting the lits in the list of materials requried
 function allLits(materials){
@@ -152,9 +152,9 @@ function downloadImages() {
         if (err) console.log("ERROR ", err);
         var response = JSON.parse(body);
 
-        response.forEach(function (monster) {
-            if (monster && monster.image40_href && monster.id <= 3800 && monster.id >= 3200) {
-                download(url + monster.image40_href, monster.id + ".png", function (err, res) {
+        response.forEach(function (monster.jade) {
+            if (monster.jade && monster.jade.image40_href && monster.jade.id <= 3800 && monster.jade.id >= 3200) {
+                download(url + monster.jade.image40_href, monster.jade.id + ".png", function (err, res) {
                     if (err) console.log(`ERROR downloading ${id}`)
                 })
             }
