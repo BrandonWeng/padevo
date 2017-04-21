@@ -8,12 +8,12 @@ var db = require('../model/monstersModel')
 
 /* GETS MONSTER ID */
 router.get('/:id',function(req,res,next){
+    console.log(req.body)
     db.findOne({id:req.params.id},function (err,docs){
         if (err) throw err;
         else console.log(docs);
         res.render('monster.jade', { title: docs.name, monster:docs.materials });
-    }
-    );
+    });
 
 });
 

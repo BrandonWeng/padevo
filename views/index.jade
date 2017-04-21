@@ -30,11 +30,13 @@ html(lang='en')
               font(color='white')  EVO
             p.cover-heading-text.lead Search Monster Name/ID to to get a list of evo materials
             p.lead
-              .input-group
-                input.form-control(type='text', placeholder='Monster Name / ID')
-                span.input-group-btn
-                  button.btn.btn-default(type='button') Search
-              // /input-group
+              form(method="POST", action="/monster/3265")
+                .input-group
+                  input(type="hidden", name="_method", value="PUT")
+                  input.form-control(type='text',name='id' ,placeholder='Monster Name / ID')
+                  span.input-group-btn
+                    button.btn.btn-default(type='submit') Search
+
           .mastfoot
             .inner
               p  Brandon Weng @2017

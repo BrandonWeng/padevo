@@ -27,13 +27,9 @@ html(lang='en')
           .inner.cover
             h1= title
             each val,key in monster
-                .col-md-4
-                  .media
-                    .media-left
-                      a(href='#')
-                        img.media-object(src= '/images/' + key +'.png' alt="...")
-                    .media-body
-                      h4.media-heading=val
+                .col-sm-2
+                  img(src= '/images/' + key +'.png' alt="...")
+                  h4=val
     //
       Bootstrap core JavaScript
       ==================================================
