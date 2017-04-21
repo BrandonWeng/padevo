@@ -45,6 +45,7 @@ function getEvolutions(NAmonsters) {
         var response = JSON.parse(body);
        if (response) store(response,NAmonsters);
         console.log("Got evolutions")
+
     });
 }
 
@@ -95,7 +96,7 @@ function getMat(id, evolutions, materials){
                 // Check each material(s) and increment count
                 val.materials.forEach(function (mat) {
 
-                    var matID = mat[0]
+                    var matID = mat[0];
                     var matCount = mat[1];
 
                     // If the material is not yet counted
@@ -122,15 +123,15 @@ function allLits(materials){
 
     // Compare each material to check if there is a path that leads to
     // the current node
-    if (materials[1] == undefined
-        || materials[0] == undefined
-        || materials[2] == undefined
-        || materials[3] == undefined
-        || materials[4] == undefined) return false;
+    if (materials[1] == undefined ||
+        materials[0] == undefined ||
+        materials[2] == undefined ||
+        materials[3] == undefined ||
+        materials[4] == undefined) return false;
 
     // Return check if all the materials are all lits
-    else return materials[0][0] == 155 && materials[1][0] == 156 && materials[2][0] == 157
-        materials[3][0] == 158 && materials[4][0] == 159 ;
+    else return materials[0][0] == 155 && materials[1][0] == 156
+        && materials[2][0] == 157 && materials[3][0] == 158 && materials[4][0] == 159 ;
 }
 
 
