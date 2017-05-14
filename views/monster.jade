@@ -16,6 +16,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
     // Custom styles for this template
     link(href='/stylesheets/index.css', rel='stylesheet')
+
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     //if lt IE 9
       script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
@@ -25,13 +26,21 @@ html(lang='en')
       .site-wrapper-inner
         .cover-container
           .inner.cover
-            h1= title
+            .row
+              img.col-1.header_image(src='/images/' + id + '.png' alt="...")
+              h1.col-11= title
+              - var total = 0;
+            .row
             each val,key in monster
+              - total = total + val
                 .col-sm-2
-                  img(src= '/images/' + key +'.png' alt="...")
+                  img.evo_material(src= '/images/' + key +'.png' alt="...")
                   h4=val
+            .row
+            h1.col-1='Space count : ' + total
     //
       Bootstrap core JavaScript
       ==================================================
     // Placed at the end of the document so the pages load faster
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='/javascripts/index.js')

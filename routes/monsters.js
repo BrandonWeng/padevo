@@ -8,10 +8,10 @@ var db = require('../model/monstersModel')
 
 /* GETS MONSTER ID */
 router.get('/:id',function(req,res,next){
-    console.log("REQUEST" + req);
-    db.findOne({id:req.params.id},function (err,docs){
+    monster_id = req.params.id
+    db.findOne({id:monster_id},function (err,docs){
         if (err) throw err;
-        else res.render('monster.jade', { title: docs.name, monster:docs.materials });
+        else res.render('monster.jade', { title: docs.name, monster:docs.materials,id:monster_id });
     });
 
 });
@@ -21,7 +21,7 @@ router.post('/',function(req,res,next){
     db.findOne({id:id},function(err,docs){
         console.log(docs,req.body,id)
         if (err) throw err;
-        else res.render('monster',{title:docs.name,monster:docs.materials})
+        else res.render('monster',{title:docs.name,monster:docs.materials, id:id})
     });
 });
 
