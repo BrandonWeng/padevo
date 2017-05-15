@@ -58,6 +58,10 @@ body {
   padding-top: 10%;
 }
 
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #50E3C2 !important;
+}
+
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;

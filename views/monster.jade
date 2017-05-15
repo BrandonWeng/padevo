@@ -29,6 +29,16 @@ html(lang='en')
       .site-wrapper-inner
         .cover-container
           .inner.cover
+            nav.navbar.navbar-default(style=" background-color: #50E3C2; border-color: #50E3C2;")
+              .container-fluid
+                // Brand and toggle get grouped for better mobile display
+                .navbar-header.text-center
+                  a.navbar-brand(href='#')
+                    font(color='white',size="16px") PADEVO
+                form.navbar-form.navbar-right
+                  .form-group
+                    input.form-control(type='text', placeholder='Search' style="right:50%;")
+                    button.btn.btn-default(type='submit') Search
             .row
               img.col-1.header_image(src='/images/' + id + '.png' alt="...")
               h1.col-11= title
