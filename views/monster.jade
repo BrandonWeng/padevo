@@ -18,7 +18,7 @@ html(lang='en')
     // Animate.css
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
     // Custom styles for this template
-    link(href='/stylesheets/index.css', rel='stylesheet')
+    link(href='/stylesheets/material.css', rel='stylesheet')
 
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     //if lt IE 9
@@ -35,9 +35,9 @@ html(lang='en')
                 .navbar-header.text-center
                   a.navbar-brand(href='#')
                     font(color='white',size="16px") PADEVO
-                form.navbar-form.navbar-right
+                form.navbar-form.navbar-right(method="POST",name="monster",action="/monster")
                   .form-group
-                    input.form-control(type='text', placeholder='Search' style="right:50%;")
+                    input.form-control(type='text',name='monster_id', placeholder='Search' style="right:50%;")
                     button.btn.btn-default(type='submit') Search
             .row
               img.col-1.header_image(src='/images/' + id + '.png' alt="...")

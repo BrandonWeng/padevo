@@ -35,6 +35,10 @@ a:hover {
   border: 1px solid #fff;
 }
 
+.blur{
+  opacity: 0.4;
+  filter:alpha(opacity=40);
+}
 
 /*
  * Base structure
@@ -48,6 +52,14 @@ body {
 body {
   color: #fff;
   text-align: center;
+}
+
+.header_image{
+  padding-top: 10%;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #50E3C2 !important;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
@@ -158,9 +170,7 @@ body {
     bottom: 0;
   }
   /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
+
   /* Handle the widths */
   .masthead,
   .mastfoot,
@@ -176,3 +186,4 @@ body {
     width: 700px;
   }
 }
+
