@@ -16,6 +16,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
     // Custom styles for this template
     link(href='/stylesheets/index.css', rel='stylesheet')
+    link(href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', rel='stylesheet')
     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
     //if lt IE 9
       script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
@@ -32,7 +33,7 @@ html(lang='en')
             p.lead
               form(method="POST", name="monster",action="/monster" )
                 .input-group
-                  input.form-control(type='text',name='monster_id' ,placeholder='Monster Name or ID')
+                  input.form-control.search_bar(type='text',name='monster_id' ,placeholder='Monster Name or ID')
                   span.input-group-btn
                     button.btn.btn-default(type='submit') Search
 
@@ -40,7 +41,8 @@ html(lang='en')
             .inner
               p  Brandon Weng @2017
     //
-      Bootstrap core JavaScript
-      ==================================================
-    // Placed at the end of the document so the pages load faster
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+    script(src='/javascripts/index.js')
+

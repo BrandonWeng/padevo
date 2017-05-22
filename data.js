@@ -54,21 +54,41 @@ function getEvolutions(NAmonsters) {
 // them into desired format (schema) then stored into DB
 function store(evolutions,NAmonsters){
 
-    NAmonsters.forEach(function(monster){
-        var m = {
-            name : monster.name,
-            id : monster.id.toString(),
-            materials : {}
-        }
-        function getMats(addToDB){
-            getMat(m.id,evolutions,m.materials)
-            addToDB(m)
-        }
+    function then_populate(){
+        var fs = require('fs');
 
-        getMats(addToDB)
-    });
+        var stream = fs.createWriteStream("list_of_monsters.js");
 
-    console.log("Stored");
+        stream.once('open',function(fd){
+            stream.write("module.exports=[ ")
+            NAmonsters.forEach(function(monster){
+                var m = {
+                    name : monster.name,
+                    id : monster.id.toString(),
+                    materials : {}
+                }
+
+                function getMats(addToDB){
+                    getMat(m.id,evolutions,m.materials)
+                    addToDB(m)
+                }
+
+                stream.write("\"" + monster.id.toString() + " " + monster.name + "\"" + ",\n");
+
+                getMats(addToDB)
+            });
+
+            stream.write("testing" + "];" + "\n");
+            stream.end();
+        })
+    }
+
+    function clearDB(callback){
+        Monsters.remove({},callback);
+    }
+
+    clearDB(then_populate);
+
 }
 
 // Funciton used to store monster.jade into db
