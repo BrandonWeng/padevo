@@ -17,6 +17,7 @@ router.get('/:id',function(req,res,next){
 });
 
 router.post('/',function(req,res,next){
+    console.log("// CALLED")
     var id = parseInt(req.body.monster_id);
     db.findOne({id:id},function(err,docs){
         console.log(docs,req.body,id)
