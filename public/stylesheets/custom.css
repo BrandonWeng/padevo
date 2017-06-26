@@ -1,0 +1,73 @@
+/* body layout */
+html,body {
+    height:100%;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+body::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-width: 0 60vw 20vh 0;
+    border-style: solid;
+    border-color: #FED766 rgba(0,0,0,0); /* second is bg*/
+}
+body::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    border-width: 0 0 60vh 60vw;
+    border-style: solid;
+    border-color: red rgba(0,0,0,0); /* second is bg*/
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+
+
+footer {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+}
+
+/* landing page layout*/
+.main {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 30px 30px 30px;
+  border: red 5px solid;
+  background-color: white;
+}
+
+
+
+.site-wrapper-inner {
+
+    /*transform: translateY(-50%);*/
+}
+
+
+.input-group {
+  width:100%;
+}
+img.floating {
+  left: 50%;
+  top: 50%;
+  position:fixed;
+  transition: left 15s linear, top 15s linear, transform 15s linear;
+}
+#hover-img-container {
+  z-index: -1;
+}

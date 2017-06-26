@@ -24,7 +24,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+// app.use('/', index);
+app.get('/', function(req, res) {
+    res.render('index');
+});
+app.get('/monster', function(req, res) {
+    console.log(req.query)
+    res.render('monster');
+});
 app.use('/monster', monster);
 app.use('/list_of_monsters',list);
 

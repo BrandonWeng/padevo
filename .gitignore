@@ -36,3 +36,5 @@ node_modules
 #padevo.iml
 #.idea
 
+# Do not add images
+public/images

@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node_modules/.bin/tsc; node ./bin/www",
+    "watch:build": "tsc --watch"
   },
   "dependencies": {
+    "@types/select2": "^4.0.35",
     "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angular-sanitize": "^1.6.4",
     "body-parser": "^1.16.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
@@ -15,6 +19,14 @@
     "mongoose": "^4.9.1",
     "morgan": "~1.7.0",
     "request": "^2.81.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "ui-select": "^0.19.8"
+  },
+  "devDependencies": {
+    "@types/angular": "^1.6.18",
+    "@types/angular-sanitize": "^1.3.4",
+    "@types/jquery": "^2.0.46",
+    "@types/select2": "^4.0.35",
+    "typescript": "^2.3.4"
   }
 }

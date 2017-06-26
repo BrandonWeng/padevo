@@ -17,7 +17,8 @@ router.get('/:id',function(req,res,next){
 });
 
 router.post('/',function(req,res,next){
-    var id = parseInt(req.body.monster_id);
+    console.log(req.query.search)
+    var id = parseInt(req.query.search, 10);
     db.findOne({id:id},function(err,docs){
         console.log(docs,req.body,id)
         if (err) throw err;

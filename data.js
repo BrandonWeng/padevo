@@ -73,7 +73,7 @@ function store(evolutions,NAmonsters){
                     addToDB(m)
                 }
 
-                stream.write("\"" + monster.id.toString() + " " + monster.name + "\"" + ",\n");
+                stream.write('"' + monster.id.toString() + " " + monster.name + "\",\n");
 
                 getMats(addToDB)
             });
