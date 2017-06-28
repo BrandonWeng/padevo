@@ -78,7 +78,7 @@ function store(evolutions,NAmonsters){
                 getMats(addToDB)
             });
 
-            stream.write("testing" + "];" + "\n");
+            stream.write("\"TESTING\"" + "];" + "\n");
             stream.end();
         })
     }
