@@ -2766,4 +2766,5 @@ module.exports=[ "1 Tyrra",
 "3587 Twinblade Mechanical Star God, Algedi",
 "3588 Slumbering Mechanical Star God, Alcyone",
 "3589 Sunny Side Mechanical Star God, Alcyone",
-"3596 Awoken Durga"];
+"3596 Awoken Durga",
+];
