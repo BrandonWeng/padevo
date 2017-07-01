@@ -1,2 +1,3 @@
 killall node
-nodemon npm start
+sudo systemctl restart nginx
+pm2 restart 0

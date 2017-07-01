@@ -1,66 +1,15 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description', content='')
-    meta(name='author', content='')
-    title PAD EVO
-    // Bootstrap CSS
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-    // Font Awesome
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    // Animate.css
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
-    // Custom styles for this template
-    link(href='/stylesheets/custom.css', rel='stylesheet')
-    link(href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', rel='stylesheet')
-    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
-      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+div#hover-img-container
+.main(ng-controller="MainController")
+  div
+    h1.cover-heading
+      | PAD
+      font(color='#E84855')  EVO
       
+    p.cover-heading-text.lead Search Monster Name/ID to get a list of evo materials
+        
+    .row
+      select.monster-dropdown(name='monster_id', ng-controller='SearchController')
       
-      
-  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-  script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
-  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js')
-  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.js')
-  script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js')
-  link(href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css', rel='stylesheet')
-  link(href="https://fonts.googleapis.com/css?family=Lato|Roboto", rel="stylesheet")
-  body(ng-app="MainAppController",ng-controller="MainController")
-    div#hover-img-container
-    .main()
-      div(ng-view='')
-      div
-        h1.cover-heading
-          | PAD
-          font(color='#FF1900')  EVO
-        p.cover-heading-text.lead Search Monster Name/ID to to get a list of evo materials
-            
-        .input-group.row
-          a.btn.btn-default(ng-click='postReq()') Search 
-          select.testing(name='monster_id')
-              
-                  // input.form-control.search_bar(type='text',name='monster_id' ,placeholder='Monster Name or ID')
-                   
-            
-
-          .mastfoot
-            .inner
-              a(href="/")  Brandon Weng @2017
      
-    footer
-        p Brandon Weng @2017
-        
-    
-        
-    
-    //
-
-    script(src='/javascripts/index.js')
-    script(src='/javascripts/MainController.js')
+footer
+    p Brandon Weng X Benson Pan @2017

@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/.bin/tsc; node ./bin/www",
-    "watch:build": "tsc --watch"
+    "start": "tsc; node ./bin/www"
   },
   "dependencies": {
     "@types/select2": "^4.0.35",
