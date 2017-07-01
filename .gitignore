@@ -37,4 +37,4 @@ config
 #.idea
 
 # Do not add images
-public/images
+#public/images/*.png
