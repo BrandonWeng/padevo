@@ -60,7 +60,7 @@ function store(evolutions,NAmonsters){
         var stream = fs.createWriteStream("list_of_monsters.js");
 
         stream.once('open',function(fd){
-            stream.write("module.exports=[ ")
+            stream.write("exports.arr=[ ")
             NAmonsters.forEach(function(monster){
                 var m = {
                     name : monster.name,
