@@ -10,23 +10,23 @@ module MainAppController {
       $http.get('/list_of_monsters').then((data) => {
         $scope.monsters = data.data;
 
-        (<any>$('.monster-dropdown')).select2({
+        (<any>angular.element('.monster-dropdown')).select2({
           placeholder: "Select a monster",
           data: $scope.monsters
         })
         .on("select2:select", (e) => {
-          $scope.formData = {monster_id : parseInt($(e.currentTarget).val())};
+          $scope.formData = {monster_id : parseInt(angular.element( e.currentTarget).val())};
           window.location = '#!/monster?id=' + $scope.formData.monster_id;
         })
-        .val($routeParams.id + ' ' + $('.monster-name').text())
+        .val($routeParams.id + ' ' + angular.element( '.monster-name').text())
         .trigger('change');
 
-        $(".monster-dropdown").on("select2:open", function() {
-          $(".select2-search__field").attr("placeholder", "Search for a monster...");
+        angular.element( ".monster-dropdown").on("select2:open", function() {
+          angular.element( ".select2-search__field").attr("placeholder", "Search for a monster...");
         });
 
-        $(".monster-dropdown").on("select2:close", function() {
-          $(".select2-search__field").attr("placeholder", null);
+        angular.element( ".monster-dropdown").on("select2:close", function() {
+          angular.element( ".select2-search__field").attr("placeholder", null);
         });
         console.log('test');
       });
@@ -99,8 +99,8 @@ module MainAppController {
       ///////////////////////////////////////////
       $scope.randMonsterImage = () => {
         var id = Math.floor(Math.random() * ($scope.monsters.length));
-        var img = $("<img ng-click='imageClick("+ parseInt($scope.monsters[id]) + ")' class='floating' src='/images/" + parseInt($scope.monsters[id]) + ".png'/>");
-        $('#hover-img-container').append(img);
+        var img = angular.element( "<img ng-click='imageClick("+ parseInt($scope.monsters[id]) + ")' class='floating' src='/images/" + parseInt($scope.monsters[id]) + ".png'/>");
+        angular.element( '#hover-img-container').append(img);
         $compile(img)($scope);
         setTimeout(function(){
             var min = 0, max = 100;
@@ -153,21 +153,21 @@ module MainAppController {
       // toggle help text
       /////////////////////
       $scope.showHint = (idx) => {
-        $('.evo_material .tip-wrapper').eq(idx).toggleClass('showTip');
+        angular.element( '.evo_material .tip-wrapper').eq(idx).toggleClass('showTip');
 
-        if ($('h4').eq(idx).hasClass('new')) {
-          $('h4').eq(idx).removeClass('new');
-          $('h4').eq(idx).append($scope.monsters[$scope.indexOfMonster($scope.monsterHint[idx])].substring($scope.monsterHint[idx].toString().length));
+        if (angular.element( 'h4').eq(idx).hasClass('new')) {
+          angular.element( 'h4').eq(idx).removeClass('new');
+          angular.element( 'h4').eq(idx).append($scope.monsters[$scope.indexOfMonster($scope.monsterHint[idx])].substring($scope.monsterHint[idx].toString().length));
         }
       }
 
       /////////////////////////
       // initalize animations
       /////////////////////////
-      if ($('#hover-img-container').length > 0){
+      if (angular.element( '#hover-img-container').length > 0){
         setInterval(() => {
             var windowRect = document.body.getBoundingClientRect();
-            $('.floating').each((idx, obj) => {
+            angular.element( '.floating').each((idx, obj) => {
               var imageRect = obj.getBoundingClientRect();
               if ((windowRect.right < imageRect.left || windowRect.left > imageRect.right))
               obj.remove();
