@@ -2783,13 +2783,13 @@ $(function() {
       "3589 Sunny Side Mechanical Star God, Alcyone",
       "3596 Awoken Durga",];
 
-  $( ".search_bar" ).autocomplete({
-      source: function( request, response ) {
-        var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
-        response( $.grep( names, function( value ) {
-        value = value.label || value.value || value;
-        return matcher.test( value );
-        }) );
-      }
-  });
+  // $( ".search_bar" ).autocomplete({
+  //     source: function( request, response ) {
+  //       var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+  //       response( $.grep( names, function( value ) {
+  //       value = value.label || value.value || value;
+  //       return matcher.test( value );
+  //       }) );
+  //     }
+  // });
 });

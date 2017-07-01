@@ -1,0 +1,241 @@
+/*
+
+body layout, global styles
+
+*/
+html,body {
+    height:100%;
+    color: #333;
+    text-align: center;
+    font-family: 'Maven Pro', sans-serif;
+}
+body::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-width: 0 60vw 30vh 0;
+    border-style: solid;
+    border-color: #FED766 rgba(0,0,0,0); /* second is bg*/
+}
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    border-width: 0 0 80vh 80vw;
+    border-style: solid;
+    border-color: #E84855 rgba(0,0,0,0); /* second is bg*/
+}
+/* view container */
+.view-container {
+    height: 100%;
+}
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 50px;
+}
+nav {
+  padding: 20px 0 0 0 ;
+}
+nav h1{
+  text-align: left;
+  font-size: 40px;
+  text-decoration: none;
+}
+nav h1 a{
+  color: #333;
+}
+nav h1 a:hover{
+  color: #333;
+  text-decoration: none;
+}
+.center {
+  text-align: center;
+}
+.red {
+    color: #E84855;
+}
+.full-width {
+  width: 100%;
+}
+.full-height {
+    height: 100%;
+}
+footer {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+}
+
+/*
+
+landing page layout
+
+*/
+#hover-img-container {
+  z-index: -1;
+}
+img.floating {
+  left: 50%;
+  top: 50%;
+  position:fixed;
+  border-radius: 40px;
+  transition: left 15s linear, top 15s linear, transform 15s linear;
+}
+.main {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 30px 30px 30px;
+  border: #E84855 5px solid;
+  background-color: white;
+  backface-visibility: hidden;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+}
+
+/*
+
+error screen
+
+*/
+.error-screen {
+    position: relative;
+    height: 100%;
+    /*width: 100%;
+    background-color: #fff;
+    text-align: center;*/
+}
+.error {
+    background-color: #eee;
+    /*border-radius: 40%;*/
+    /*border: #E84855 5px solid;*/
+    border-left: 20px solid gray;
+    top: 15%;
+    height: 40%;
+    /*width: 60%;*/
+}
+.error h1 {
+  font-family: 'VT323', sans-serif;
+}
+.error h1,h2{
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mascot {
+    position: fixed;
+    height: 100%;
+    right:50px;
+}
+.bubble-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.widen {
+  margin: 0 5vw;
+}
+.flex-item object {
+  max-width:100%;
+  max-height:100%;
+}
+
+/*
+
+monster screen
+
+*/
+div.monster-info {
+  text-align: left;
+}
+.monster-info h3 {
+  margin-top: 50px;
+}
+.monster-name {
+  font-family: 'Lato';
+  margin-top: 10px;
+}
+.md-size.d-flex.content {
+  margin-top: 50px;
+}
+.materials-container {
+  height: 75%;
+}
+.evo_material {
+  display: inline-block;
+  margin: 10px;
+  white-space: nowrap;
+}
+.evo_material .tip-wrapper{
+  display: inline-block;
+  width: 0;
+  margin-left: 10px;
+  overflow: hidden;
+  transition: width 500ms ease-out;
+}
+.evo_material .tip-wrapper.showTip{
+  width: 100%;
+}
+
+.header-image {
+  height: 80px;
+  display: inline;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-item {
+  position: relative;
+  margin: 10px;
+  display: inline-block;
+  flex: 0 1 auto;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.vertical-center {
+  position: absolute; /* must be wrapped with a position relative item */
+  top: 50%;
+  transform: translateY(-50%);
+}
+.abs-center {
+  position: absolute; /* must be wrapped with a position relative item */
+  width: 75%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fixed-right {
+  right: 0;
+}
+
+
+/*
+
+responsive layouts WIP
+
+*/
+@media (min-width: 1200px) {
+    .md-size {
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .evo-data {
+      width: 600px;
+    }
+}

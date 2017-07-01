@@ -6,13 +6,19 @@ var config = require('../config');
 mongoose.connect(config.dbConfig());
 var db = require('../model/monstersModel')
 
+fromdb = '';
 /* GETS MONSTER ID */
 router.get('/:id',function(req,res,next){
-    monster_id = req.params.id
-    db.findOne({id:monster_id},function (err,docs){
-        if (err) throw err;
-        else res.render('monster.jade', { title: docs.name, monster:docs.materials,id:monster_id });
+  console.log(req.params)
+  // var id = parseInt(req.query.search, 10);
+  console.log('the get request is here');
+    id = req.params.id
+    db.findOne({id:id},function (err,docs){
+        fromdb = docs;
+        if (err || docs == null) res.render('error')
+        else res.render('monster', { title: docs.name, base:docs.id, monster:docs.materials,id:id });
     });
+    console.log(fromdb);
 
 });
 

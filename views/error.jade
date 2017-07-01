@@ -1,41 +1,68 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
-    meta(name='description', content='')
-    meta(name='author', content='')
-    title PAD EVO
-    // Bootstrap CSS
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
-    // Font Awesome
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    // Animate.css
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
-    // Custom styles for this template
-    link(href='/stylesheets/index.css', rel='stylesheet')
-    link(href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', rel='stylesheet')
-    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    //if lt IE 9
-      script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
-      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
-  body
-    .site-wrapper
-      .site-wrapper-inner
-        .cover-container
-          .inner.cover
-            h1.cover-heading(href='http://padevo.info/')
-              | ERROR
-              font(color='white')  404
-            p.cover-heading-text.lead Hmmmm... this page doesn't exist anymore :/
-        a.btn.btn-lg(href="http://padevo.info/") Click here to go back
+.error-screen
+    nav
+      .d-flex.md-size
+        h1.flex-item.full-width
+          a(href='#!/')
+            | PAD
+            font(color='#E84855')  EVO
+        .flex-item.full-width
+          .vertical-center.fixed-right
+            select.monster-dropdown(name='monster_id', ng-controller='SearchController')
+    .mascot.d-flex
+        .flex-item.error.front
+          .bubble-text
+              h2.center
+                  h1 error.
+                  h3.widen We can't find what you're looking for...
+                  a(href='#!/') 
+                    h4 Return
+        .flex-item.full-height
+            object.full-height(type='image/svg+xml', data='/images/final_tyran.svg')
+        
+//- doctype html
+//- html(lang='en')
+//-   head
+//-     meta(charset='utf-8')
+//-     meta(http-equiv='X-UA-Compatible', content='IE=edge')
+//-     meta(name='viewport', content='width=device-width, initial-scale=1')
+//-     // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+//-     meta(name='description', content='')
+//-     meta(name='author', content='')
+//-     title PAD EVO
+//-     // Bootstrap CSS
+//-     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+//-     // Font Awesome
+//-     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')n
+//-     // Animate.css
+//-     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+//-     // Custom styles for this template
+//-     link(href='/stylesheets/index.css', rel='stylesheet')
+//-     link(href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css', rel='stylesheet')
+//-     // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+//-     //if lt IE 9
+//-       script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+//-       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+//-   body
+//-     .site-wrapper
+//-       .site-wrapper-inner
+//-         .cover-container
+//-           .inner.cover
+//-             h1.cover-heading(href='http://padevo.info/')
+//-               | ERROR
+//-               font(color='white')  404
+//-             p.cover-heading-text.lead Hmmmm... this page doesn't exist anymore :/
+//-         a.btn.btn-lg(href="/") Click here to go back
+//- 
+//- 
+//-     //
+//- 
+//-     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+//-     script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+//-     script(src='/javascripts/index.js')
 
-
-    //
-
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
-    script(src='/javascripts/index.js')
-
+//- <<<<<<< HEAD
+//- doctype html
+//- html(lang='en')
+//-   h1 ERROR Something went wrong!!
+//- =======
+//- >>>>>>> 5987287c998d91fe48b8e68657d5160f4077de9f

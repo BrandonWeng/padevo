@@ -66,6 +66,13 @@ body {
   margin-left: auto;
 
 }
+select {
+    width: 200px;
+}
+
+.select2-container .select2-dropdown{
+    color:black;
+}
 
 /* Padding for spacing */
 .inner {
