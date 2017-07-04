@@ -1,14 +1,12 @@
 div#hover-img-container
 .main(ng-controller="MainController")
-  div
-    h1.cover-heading
-      | PAD
-      font(color='#E84855')  EVO
+  h1.cover-heading
+    | PAD
+    font(color='#E84855')  EVO
       
-    p.cover-heading-text.lead Search Monster Name/ID to get a list of evo materials
+  p.cover-heading-text.lead Search Monster Name/ID to get a list of evo materials
         
-    .row
-      select.monster-dropdown(name='monster_id', ng-controller='SearchController')
+  select.monster-dropdown(name='monster_id', ng-controller='SearchController')
       
      
 footer

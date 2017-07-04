@@ -28,7 +28,6 @@ module MainAppController {
         angular.element( ".monster-dropdown").on("select2:close", function() {
           angular.element( ".select2-search__field").attr("placeholder", null);
         });
-        console.log('test');
       });
     }
   }

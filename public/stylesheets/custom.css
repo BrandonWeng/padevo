@@ -174,17 +174,20 @@ div.monster-info {
 .evo_material {
   display: inline-block;
   margin: 10px;
-  white-space: nowrap;
 }
 .evo_material .tip-wrapper{
   display: inline-block;
-  width: 0;
   margin-left: 10px;
   overflow: hidden;
-  transition: width 500ms ease-out;
+  max-width: 0px;
+  transition: all 500ms ease-out;
 }
 .evo_material .tip-wrapper.showTip{
-  width: 100%;
+  width: auto;
+  max-width: 500px;
+}
+.tip-wrapper h4 {
+  white-space: nowrap;
 }
 
 .header-image {
@@ -230,6 +233,23 @@ div.monster-info {
 responsive layouts WIP
 
 */
+@media (max-width: 400px) {
+  .main {
+    width: 100%;
+  }
+  .monster-dropdown {
+    width: 100%;
+  }
+
+  nav .full-width {
+    width: auto;
+  }
+  nav .flex-item .fixed-right {
+    margin-top: 50px;
+    top:0;
+    transform: translateY(0);
+  }
+}
 @media (min-width: 1200px) {
     .md-size {
         width: 1200px;
