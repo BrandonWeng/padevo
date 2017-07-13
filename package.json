@@ -6,6 +6,7 @@
     "start": "tsc; node ./bin/www"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.68",
     "@types/select2": "^4.0.35",
     "angular": "^1.6.4",
     "angular-route": "^1.6.4",
@@ -15,11 +16,11 @@
     "debug": "~2.6.0",
     "express": "~4.14.1",
     "jade": "~1.11.0",
+    "lodash": "^4.17.4",
     "mongoose": "^4.9.1",
     "morgan": "~1.7.0",
     "request": "^2.81.0",
-    "serve-favicon": "~2.3.2",
-    "ui-select": "^0.19.8"
+    "serve-favicon": "~2.3.2"
   },
   "devDependencies": {
     "@types/angular": "^1.6.18",
