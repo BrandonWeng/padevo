@@ -25,6 +25,8 @@ module MainAppController {
           CustomDataAdapter.prototype.query = function (params, callback) {
             if (!("page" in params)) {
               params.page = 1;
+            }
+            if (!("term" in params)) {
               params.term = "";
             }
 
