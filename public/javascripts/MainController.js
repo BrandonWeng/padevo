@@ -35,7 +35,7 @@ var MainAppController;
                         });
                         pageSize = 20;
                         results = _.filter(arr, function (e) {
-                            return (params.term === "" || e.text.indexOf(params.term) >= 0);
+                            return (params.term === "" || e.text.toLowerCase().indexOf(params.term.toLowerCase()) >= 0);
                         });
                         callback({
                             results: results.slice((params.page - 1) * pageSize, params.page * pageSize),
