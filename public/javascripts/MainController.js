@@ -10,12 +10,49 @@ var MainAppController;
             // fix this, change to db query
             $http.get('/list_of_monsters').then((data) => {
                 $scope.monsters = data.data;
+                // config custom dataAdapter for select2
+                $.fn.select2.amd.define('select2/data/customAdapter', [
+                    'select2/data/array',
+                    'select2/utils'
+                ], function (ArrayAdapter, Utils) {
+                    function CustomDataAdapter($element, options) {
+                        CustomDataAdapter.__super__.constructor.call(this, $element, options);
+                    }
+                    Utils.Extend(CustomDataAdapter, ArrayAdapter);
+                    CustomDataAdapter.prototype.query = function (params, callback) {
+                        if (!("page" in params)) {
+                            params.page = 1;
+                        }
+                        if (!("term" in params)) {
+                            params.term = "";
+                        }
+                        var pageSize, results;
+                        var arr = _.map($scope.monsters, function (obj, i) {
+                            return {
+                                id: i,
+                                text: obj
+                            };
+                        });
+                        pageSize = 20;
+                        results = _.filter(arr, function (e) {
+                            return (params.term === "" || e.text.toLowerCase().indexOf(params.term.toLowerCase()) >= 0);
+                        });
+                        callback({
+                            results: results.slice((params.page - 1) * pageSize, params.page * pageSize),
+                            pagination: { more: results.length >= params.page * pageSize }
+                            // retrieve more when user hits bottom
+                        });
+                    };
+                    return CustomDataAdapter;
+                });
                 angular.element('.monster-dropdown').select2({
                     placeholder: "Select a monster",
-                    data: $scope.monsters
+                    data: $scope.monsters,
+                    ajax: {},
+                    dataAdapter: $.fn.select2.amd.require('select2/data/customAdapter')
                 })
                     .on("select2:select", (e) => {
-                    $scope.formData = { monster_id: parseInt(angular.element(e.currentTarget).val()) };
+                    $scope.formData = { monster_id: parseInt(e.params.data.text) };
                     window.location = '#!/monster?id=' + $scope.formData.monster_id;
                 })
                     .val($routeParams.id + ' ' + angular.element('.monster-name').text())
@@ -26,7 +63,6 @@ var MainAppController;
                 angular.element(".monster-dropdown").on("select2:close", function () {
                     angular.element(".select2-search__field").attr("placeholder", null);
                 });
-                console.log('test');
             });
         }
     }

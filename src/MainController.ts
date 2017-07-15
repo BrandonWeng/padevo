@@ -25,6 +25,8 @@ module MainAppController {
           CustomDataAdapter.prototype.query = function (params, callback) {
             if (!("page" in params)) {
               params.page = 1;
+            }
+            if (!("term" in params)) {
               params.term = "";
             }
 
@@ -40,7 +42,7 @@ module MainAppController {
             pageSize = 20;
 
             results = _.filter(arr, function (e) {
-                return (params.term === "" || e.text.indexOf(params.term) >= 0);
+                return (params.term === "" || e.text.toLowerCase().indexOf(params.term.toLowerCase()) >= 0);
               });
 
               callback({
