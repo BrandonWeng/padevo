@@ -264,3 +264,11 @@ responsive layouts WIP
       width: 600px;
     }
 }
+@media (max-height: 670px) {
+  .select2-container .select2-results {
+    max-height: 100px;
+  }
+  .select2-results__options {
+    height: 100px;
+  }
+}
