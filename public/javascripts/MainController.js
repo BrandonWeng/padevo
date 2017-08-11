@@ -48,8 +48,34 @@ var MainAppController;
                 angular.element('.monster-dropdown').select2({
                     placeholder: "Select a monster",
                     data: $scope.monsters,
-                    ajax: {},
-                    dataAdapter: $.fn.select2.amd.require('select2/data/customAdapter')
+                    ajax: {
+                        url: "/api/list",
+                        dataType: 'json',
+                        delay: 250,
+                        data: function (params) {
+                            return {
+                                q: params.term,
+                                page: params.page
+                            };
+                        },
+                        processResults: function (data, params) {
+                            var pageSize = 20;
+                            // parse the results into the format expected by Select2
+                            // since we are using custom formatting functions we do not need to
+                            // alter the remote JSON data, except to indicate that infinite
+                            // scrolling can be used
+                            params.page = params.page || 1;
+                            // console.log("results: ", data);
+                            // console.log(params.page * 10, params, data);
+                            return {
+                                results: data,
+                                pagination: {
+                                    more: (params.page * pageSize) <= data.length * params.page
+                                }
+                            };
+                        },
+                        cache: true
+                    }
                 })
                     .on("select2:select", (e) => {
                     $scope.formData = { monster_id: parseInt(e.params.data.text) };

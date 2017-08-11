@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var monster = require('./routes/monsters');
+var api = require('./routes/api');
 var list = require('./routes/list');
 var list_of_monsters = require('./list_of_monsters').arr
 
@@ -36,6 +37,7 @@ app.get('/home', function(req, res) {
   res.render('index');
 });
 app.use('/monster', monster);
+app.use('/api', api);
 app.get('/error', function(req, res) {
     res.render('error');
 });

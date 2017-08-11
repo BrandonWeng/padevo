@@ -191,7 +191,8 @@ div.monster-info {
 }
 
 .header-image {
-  height: 80px;
+  width: 50%;
+  height: 50%;
   display: inline;
 }
 
@@ -225,6 +226,20 @@ div.monster-info {
 
 .fixed-right {
   right: 0;
+}
+
+.navigation {
+  margin: 10px 0 10px 0;
+}
+
+.nested div {
+  max-height: 10000px;
+  overflow: hidden;
+  /*transition: max-height 500ms linear;*/
+  transform: translateZ(0);
+}
+.nested div.closed {
+  max-height: 0px;
 }
 
 

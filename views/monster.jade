@@ -1,5 +1,6 @@
 //- <<<<<<< HEAD
 div.monster-info(ng-controller='MainController')
+  script(src='/javascripts/tree.js')
   nav
     .d-flex.md-size
       h1.flex-item.full-width
@@ -21,21 +22,26 @@ div.monster-info(ng-controller='MainController')
       - var count = -1;
       .evo-data
         .center(style='border-bottom : 2px solid black;')
-          img.header-image(src='/images/' + id + '.png' alt="...")
+          - var appendZeroes = '0'.repeat(5 - id.toString().length);
+          img.header-image(src='http://pad.byhuy.co/images/Monsters/MONS_' + appendZeroes + id + '.PNG' alt="...")
           h2.monster-name= title
-        if (monster !== undefined && base !== key)
-          h3 Required evolution materials
-          .materials-container
-            each val,key in monster
-                - count++;
-                - total = total + val
-                  .evo_material(ng-click='showHint(#{count})')
-                    img(ng-repeat='i in getNumber(#{val}) track by $index', src= '/images/' + key +'.png' alt="...", style='z-index:-1;')
-                    .tip-wrapper
-                      h4(class='new', ng-init='saveMonsterHint(#{key})') x#{val} 
-          h3 Total box space: #{total}
-        else
-          h3.center No materials required! 
+        //- if (monster !== undefined && base !== key)
+        //-   h3 Required evolution materials
+        //-   .materials-container
+        //-     each val,key in monster
+        //-         - count++;
+        //-         - total = total + val
+        //-           .evo_material(ng-click='showHint(#{count})')
+        //-             img(ng-repeat='i in getNumber(#{val}) track by $index', src= '/images/' + key +'.png' alt="...", style='z-index:-1;')
+        //-             .tip-wrapper
+        //-               h4(class='new', ng-init='saveMonsterHint(#{key})') x#{val} 
+        //-   h3 Total box space: #{total}
+        //- else
+        //-   h3.center No materials required! 
+      .navigation    
+        button(onclick='collapseAll()') collapse all
+        button(onclick='showAll()') expand all
+      !{rendered}
 //- doctype html
 //- html(lang='en')
 //-   head
