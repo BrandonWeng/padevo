@@ -1,13 +1,18 @@
 from py_data.data import GetData
 from py_data.constants import constants
+import json
+from py_data.DAO import MonsterDAO
+
 
 class ParseData(object):
-    def __init__(self, list_monsters, list_evolution_materials):
-        self.list_monsters = list_monsters
-        self.list_evolution_materials = list_evolution_materials
+    def __init__(self):
+        get_data = GetData.GetData()
+        self.list_monsters = get_data.get_monsters()
+        self.list_evolution_materials = get_data.get_evolution_materials()
+        self.monsterDAO = MonsterDAO.MonsterDAO()
 
     def get_us_only_monster(self):
-        us_only_monsters = [monster for monster in self.list_monsters if monster['jp_only'] is False]
+        us_only_monsters = [monster["id"] for monster in self.list_monsters if monster['jp_only'] is False]
         return us_only_monsters
 
     def has_evo_materials(self, evolves_to_id):
@@ -19,16 +24,22 @@ class ParseData(object):
         return False
 
     def make_evolution_tree(self, evolves_to_id):
-
         evo_tree = {
             "id": evolves_to_id,
             "materials": {}
         }
+        print(evolves_to_id)
+
+        if evolves_to_id == 2978 or evolves_to_id == 2926:
+            return evo_tree
 
         for monster_id, evo_stages in self.list_evolution_materials.items():
+
+            found = False
+
             for stage in evo_stages:
                 if stage[constants.evo_to] == evolves_to_id and \
-                                stage[constants.materials] != constants.de_evolution_materials:
+                                stage[constants.materials] != constants.de_evolution_materials :
 
                     for material in stage[constants.materials]:
                         material_id = str(material[0])
@@ -41,14 +52,17 @@ class ParseData(object):
                                 evo_tree[constants.materials][material_id] = material_count
                             else:
                                 evo_tree[constants.materials][material_id] += material_count
+                    found = True
+
+            if found is True:
+                evo_tree["evolves_from"] = self.make_evolution_tree(int(monster_id))
 
         return evo_tree
 
+    def refresh_monster_materials(self):
+        us_only_monster = self.get_us_only_monster()
+        self.monsterDAO.delete_all_monsters()
 
-get_data = GetData.GetData()
-monsters = get_data.get_monsters()
-evolution_materials = get_data.get_evolution_materials()
-
-parse_data = ParseData(monsters, evolution_materials)
-us_only_monster = parse_data.get_us_only_monster()
-print(parse_data.make_evolution_tree(2076))
+        for monster_id in us_only_monster:
+            evo_tree = self.make_evolution_tree(monster_id)
+            self.monsterDAO.insert_monsters(evo_tree)
