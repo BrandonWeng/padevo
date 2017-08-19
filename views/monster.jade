@@ -1,6 +1,5 @@
 //- <<<<<<< HEAD
 div.monster-info(ng-controller='MainController')
-  script(src='/javascripts/tree.js')
   nav
     .d-flex.md-size
       h1.flex-item.full-width
@@ -37,10 +36,21 @@ div.monster-info(ng-controller='MainController')
         //-               h4(class='new', ng-init='saveMonsterHint(#{key})') x#{val} 
         //-   h3 Total box space: #{total}
         //- else
-        //-   h3.center No materials required! 
+        //-   h3.center No materials required!
+      .summary(style="width: 100%;")
+        .summary-details 
+          img.summary-image(src='/images/2719.png' alt="...") 
+          p Almighty God, Zeus Dragon
+          
+        .summary-details
+          i(class="fa fa-arrow-right" aria-hidden="true")
+        .summary-details
+          img.summary-image(src='/images/3265.png' alt="...")
+          p Almighty God, Ra Dragon
+          
       .navigation    
-        button(onclick='collapseAll()') collapse all
-        button(onclick='showAll()') expand all
+          button(onclick='collapseAll()') collapse all
+          button(onclick='showAll()') expand all
       !{rendered}
 //- doctype html
 //- html(lang='en')

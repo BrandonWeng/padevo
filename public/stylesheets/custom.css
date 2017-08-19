@@ -161,6 +161,9 @@ div.monster-info {
 .monster-info h3 {
   margin-top: 50px;
 }
+.monster-info .fixed-right {
+  min-width: 50%;
+}
 .monster-name {
   font-family: 'Lato';
   margin-top: 10px;
@@ -191,9 +194,26 @@ div.monster-info {
 }
 
 .header-image {
-  width: 50%;
-  height: 50%;
+  max-width: 80%;
+  max-height: 50%;
   display: inline;
+}
+
+.summary {
+  text-align: center;
+  margin: 30px;
+}
+.summary-details {
+  display: inline-block;
+}
+.summary-details i {
+  position: relative;
+  font-size: 32px;
+  top: -30px;
+  width:50px;
+}
+.summary-image {
+  min-width: 60px;
 }
 
 .d-flex {

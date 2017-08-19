@@ -7,88 +7,49 @@ var MainAppController;
             this.$scope = $scope;
             this.$http = $http;
             this.$routeParams = $routeParams;
-            // fix this, change to db query
-            $http.get('/list_of_monsters').then((data) => {
-                $scope.monsters = data.data;
-                // config custom dataAdapter for select2
-                $.fn.select2.amd.define('select2/data/customAdapter', [
-                    'select2/data/array',
-                    'select2/utils'
-                ], function (ArrayAdapter, Utils) {
-                    function CustomDataAdapter($element, options) {
-                        CustomDataAdapter.__super__.constructor.call(this, $element, options);
-                    }
-                    Utils.Extend(CustomDataAdapter, ArrayAdapter);
-                    CustomDataAdapter.prototype.query = function (params, callback) {
-                        if (!("page" in params)) {
-                            params.page = 1;
-                        }
-                        if (!("term" in params)) {
-                            params.term = "";
-                        }
-                        var pageSize, results;
-                        var arr = _.map($scope.monsters, function (obj, i) {
-                            return {
-                                id: i,
-                                text: obj
-                            };
-                        });
-                        pageSize = 20;
-                        results = _.filter(arr, function (e) {
-                            return (params.term === "" || e.text.toLowerCase().indexOf(params.term.toLowerCase()) >= 0);
-                        });
-                        callback({
-                            results: results.slice((params.page - 1) * pageSize, params.page * pageSize),
-                            pagination: { more: results.length >= params.page * pageSize }
-                            // retrieve more when user hits bottom
-                        });
-                    };
-                    return CustomDataAdapter;
-                });
-                angular.element('.monster-dropdown').select2({
-                    placeholder: "Select a monster",
-                    data: $scope.monsters,
-                    ajax: {
-                        url: "/api/list",
-                        dataType: 'json',
-                        delay: 250,
-                        data: function (params) {
-                            return {
-                                q: params.term,
-                                page: params.page
-                            };
-                        },
-                        processResults: function (data, params) {
-                            var pageSize = 20;
-                            // parse the results into the format expected by Select2
-                            // since we are using custom formatting functions we do not need to
-                            // alter the remote JSON data, except to indicate that infinite
-                            // scrolling can be used
-                            params.page = params.page || 1;
-                            // console.log("results: ", data);
-                            // console.log(params.page * 10, params, data);
-                            return {
-                                results: data,
-                                pagination: {
-                                    more: (params.page * pageSize) <= data.length * params.page
-                                }
-                            };
-                        },
-                        cache: true
-                    }
-                })
-                    .on("select2:select", (e) => {
-                    $scope.formData = { monster_id: parseInt(e.params.data.text) };
-                    window.location = '#!/monster?id=' + $scope.formData.monster_id;
-                })
-                    .val($routeParams.id + ' ' + angular.element('.monster-name').text())
-                    .trigger('change');
-                angular.element(".monster-dropdown").on("select2:open", function () {
-                    angular.element(".select2-search__field").attr("placeholder", "Search for a monster...");
-                });
-                angular.element(".monster-dropdown").on("select2:close", function () {
-                    angular.element(".select2-search__field").attr("placeholder", null);
-                });
+            angular.element('.monster-dropdown').select2({
+                width: '100%',
+                placeholder: "Select a monster",
+                ajax: {
+                    url: "/api/list",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        var pageSize = 20;
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+                        // console.log("results: ", data);
+                        // console.log(params.page * 10, params, data);
+                        return {
+                            results: data,
+                            pagination: {
+                                more: (params.page * pageSize) <= data.length * params.page
+                            }
+                        };
+                    },
+                    cache: true
+                }
+            })
+                .on("select2:select", (e) => {
+                $scope.formData = { monster_id: parseInt(e.params.data.text) };
+                window.location = '#!/monster?id=' + $scope.formData.monster_id;
+            })
+                .val($routeParams.id + ' ' + angular.element('.monster-name').text())
+                .trigger('change');
+            angular.element(".monster-dropdown").on("select2:open", function () {
+                angular.element(".select2-search__field").attr("placeholder", "Search for a monster...");
+            });
+            angular.element(".monster-dropdown").on("select2:close", function () {
+                angular.element(".select2-search__field").attr("placeholder", null);
             });
         }
     }
@@ -207,6 +168,14 @@ var MainAppController;
                         $scope.randMonsterImage();
                 }, 750);
             }
+            //     $scope.$watch(function() {
+            //     return angular.element(".nested:not(.closed)").length;
+            // }, function (newVal, oldVal) {
+            //     if(newVal !== oldVal) {
+            //        console.log('changed!', newVal, oldVal);
+            //        // do your changes here
+            //     }
+            // });
             // ensure animations are not running if MainController is not removed correctly
             $scope.$on("$destroy", function handler() {
                 $scope.doNotCreate = true;
