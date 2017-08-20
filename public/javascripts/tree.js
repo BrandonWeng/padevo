@@ -13,13 +13,14 @@ $(document).ready(() => {
 
   $(".monster-dropdown").select2({ width: 'resolve' });
 
-  $(window).on('hashchange', function(e){
-// waitForImages();
-// console.log(e.originalEvent);
-});
+//   $(window).on('hashchange', function(e){
+// // waitForImages();
+// // console.log(e.originalEvent);
+// });
   // waitForImages();
   // console.log(  $('.parent-img'));
-})
+});
+
 $(document).change((e) => {
   if (e.currentTarget.URL.indexOf('monster') != -1) {
     waitForImages();
@@ -36,14 +37,20 @@ var waitForImages = () => {
 
     $('.evo_material').bind('cssClassChanged', (e) => {
       // console.log(e);
-      $('.material-count').html('Required box space: ' + $('.nested:not(.closed)').length)
+      var total = 0;
+      $('.nested:not(.closed)').each((idx, obj) => {
+        if ($(obj).children('.nested:not(.closed)').length == 0)
+          total += parseInt(obj.dataset.num)
+      });
+      $('.material-count').html('Required box space: ' + total)
     });
 
     $('.parent-img').click(function(){
       $(this).siblings().toggleClass('closed');
       $('.evo_material').trigger('cssClassChanged');
     });
-    
+
     $('.evo_material').trigger('cssClassChanged');
+      $('[data-toggle="tooltip"]').tooltip();
   }
 }

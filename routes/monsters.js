@@ -57,50 +57,28 @@ var indexOfMonster = (id) => {
   return -1; // not found
 }
 
+// var condensedView = function();
+
 // helper method to render
 var renderMaterial = function(monster, level) {
-  var render = '';//'<div>'+monster['id'];
-  // if (monster['id'] != undefined)
-  //   console.log('empty');
-
-
+  var render = '';
   if (level != 0 && monster['evolves_from'] != undefined) {
     // console.log('reached', monster['evolves_from']);
-    render += '<div class="nested"><img class="parent-img" style="margin-bottom: 10px; margin-left: '+level*40+'px" src="/images/' + monster['evolves_from']['id'] + '.png"/> ' + list_of_monsters[indexOfMonster(monster['evolves_from']['id'])] + ' x1 '+ (monster['evolves_from']['evolves_from'] != undefined ? '(evolved)' : '');
+    render += '<div class="nested" data-num=1><img data-toggle="tooltip" title="' + list_of_monsters[indexOfMonster(monster['evolves_from']['id'])] + '" data-placement="right" class="parent-img" style="margin-bottom: 10px; margin-left: '+level*40+'px" src="/images/' + monster['evolves_from']['id'] + '.png"/> ' + ' x1 '+ (monster['evolves_from']['evolves_from'] != undefined ? '(evolved)' : '');
     render += renderMaterial(monster['evolves_from'], level + 1);
     render += '</div>'
-
-
-    //+ '</div>';
   }
 
   for (i in monster['materials']) {
-    // console.log(monster['materials'][i]);
     var obj = monster['materials'][i];
-    // console.log(obj);
-
 
     if (obj['materials'] != undefined) {
-
-      // if (obj['evolves_from'] != undefined) {
-      //
-      //     // console.log(obj['evolves_from'] );
-      //   render += '<div class="nested"><img class="parent-img" style="margin-left: '+level*40+'px" src="/images/' + obj['evolves_from']['id'] + '.png"/>' + obj['evolves_from']['id'] + ' x1';
-      //   render += renderMaterial(obj['evolves_from'], level+1);
-      //   render += '</div>';
-      // }
-      // else if (obj['id'] != undefined) {
-      //   render += '<div><img style="margin-left: '+level*40+'px" src="/images/' + obj['id'] + '.png"/>'+ obj['id'] +' x' + 1 + ' evolves from</div>';
-      //   // render += '<div><img style="margin-left: '+level*40+'px" src="/images/' + obj['id'] + '.png"/>'+ obj['id']['id'] +' x' + 1 + ' evolves from</div>';
-      // }
-      // console.log(obj['evolves_from'] != undefined);
-          render += '<div class="nested"><img class="parent-img" style="margin-left: '+level*40+'px" src="/images/' + obj['id'] + '.png"/> ' + list_of_monsters[indexOfMonster(i)] + ' x1 ' + (obj['evolves_from'] != undefined ? '(evolved)' : '');
+          render += '<div class="nested" data-num=1><img data-toggle="tooltip" title="' + list_of_monsters[indexOfMonster(i)] + '" data-placement="right" class="parent-img" style="margin-left: '+level*40+'px" src="/images/' + obj['id'] + '.png"/> ' + ' x1 ' + (obj['evolves_from'] != undefined ? '(evolved)' : '');
           render += renderMaterial(obj, level+1);
           render += '</div>';
     }
     else {
-      render += '<div class="nested"><img style="margin-left: '+level*40+'px" src="/images/' + i + '.png"/> ' + list_of_monsters[indexOfMonster(i)] + ' x' + obj + '</div>';
-        // console.log(i, obj);
+      render += '<div class="nested" data-num='+ obj +'><img data-toggle="tooltip" title="' + list_of_monsters[indexOfMonster(i)] + '" data-placement="right" style="margin-left: '+level*40+'px" src="/images/' + i + '.png"/> ' + ' x' + obj + '</div>';
     }
   }
 
@@ -121,9 +99,4 @@ var renderMaterial = function(monster, level) {
   return render;
 }
 
-
-// .evo_material(ng-click='showHint(#{count})')
-//   img(ng-repeat='i in getNumber(#{val}) track by $index', src= '/images/' + key +'.png' alt="...", style='z-index:-1;')
-//   .tip-wrapper
-//     h4(class='new', ng-init='saveMonsterHint(#{key})') x#{val}
 module.exports = router;
