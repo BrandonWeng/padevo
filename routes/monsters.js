@@ -10,7 +10,7 @@ var list_of_monsters = require('../list_of_monsters').arr;
 fromdb = '';
 /* GETS MONSTER ID */
 router.get('/:id/:grid',function(req,res,next){
-  console.log('PARAMS', req.params)
+  // console.log('PARAMS', req.params)
   // var id = parseInt(req.query.search, 10);
   // console.log('the get request is here');
     id = req.params.id
@@ -18,7 +18,7 @@ router.get('/:id/:grid',function(req,res,next){
     db.findOne({id:id},function (err,docs){
         fromdb = docs;
 
-        console.log('########' + fromdb);
+        // console.log('########' + fromdb);
         if (err || docs == null) res.render('error')
         else {
           // process the tree
@@ -30,7 +30,6 @@ router.get('/:id/:grid',function(req,res,next){
           if (gridView) {
             var monsterList = {};
             condensedMaterial(monsterList, test, true);
-            console.log(monsterList);
             testRender += renderGrid(monsterList);
           }
 
@@ -83,11 +82,8 @@ var renderGrid = function(allMonsters) {
 
 //
 var condensedMaterial = function(allMonsters, monster, parent) {
-  console.log('@@@@', monster['materials'])
   if (!parent && monster['evolves_from'] != undefined) {
-    console.log('in here', monster['evolves_from'])
     if (monster['evolves_from']['evolves_from'] == undefined) {
-      console.log('ENTRY', allMonsters[monster['evolves_from']['id']]);
       allMonsters[monster['evolves_from']['id']] = (allMonsters[monster['evolves_from']['id']] == undefined ? 1 : allMonsters[monster['evolves_from']['id']] + 1);
 
     }
@@ -95,20 +91,14 @@ var condensedMaterial = function(allMonsters, monster, parent) {
   }
   for (i in monster['materials']) {
     var obj = monster['materials'][i];
-    console.log('***', obj);
     if (obj['materials'] != undefined) {
       if (obj['evolves_from'] == undefined) {
-
         allMonsters[i] = (allMonsters[i] == undefined ? 1 : allMonsters[i] + 1);
-        console.log('add', i, 1)
-        // allMonsters[i]++;
       }
       condensedMaterial(allMonsters, obj, false);
     }
     else {
       allMonsters[i] = (allMonsters[i] == undefined ? obj : allMonsters[i] + obj);
-      console.log('add', i, obj)
-      // allMonsters[i] += obj;
     }
   }
 }
@@ -117,7 +107,6 @@ var condensedMaterial = function(allMonsters, monster, parent) {
 var renderMaterial = function(monster, level) {
   var render = '';
   if (level != 0 && monster['evolves_from'] != undefined) {
-    // console.log('reached', monster['evolves_from']);
     render += '<div class="nested" data-num=1><img data-toggle="tooltip" title="' + list_of_monsters[indexOfMonster(monster['evolves_from']['id'])] + '" data-placement="right" class="parent-img" style="margin-bottom: 10px; margin-left: '+level*40+'px" src="/images/' + monster['evolves_from']['id'] + '.png"/> ' + ' x1 '+ (monster['evolves_from']['evolves_from'] != undefined ? '(evolved)' : '');
     render += renderMaterial(monster['evolves_from'], level + 1);
     render += '</div>'

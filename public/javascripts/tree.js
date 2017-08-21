@@ -1,5 +1,3 @@
-
-
 var collapseAll = () => {
   $('.parent-img').siblings().addClass('closed');
   $('.evo_material').trigger('cssClassChanged');
@@ -14,19 +12,12 @@ $(document).ready(() => {
 
   $(".monster-dropdown").select2({ width: 'resolve' });
 
-//   $(window).on('hashchange', function(e){
-// // waitForImages();
-// // console.log(e.originalEvent);
-// });
-  // waitForImages();
-  // console.log(  $('.parent-img'));
 });
 
 $(document).change((e) => {
   if (e.currentTarget.URL.indexOf('monster') != -1) {
     waitForImages();
   }
-  // console.log(e.currentTarget.URL.indexOf('monster'));
 });
 
 
