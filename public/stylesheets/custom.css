@@ -175,6 +175,7 @@ div.monster-info {
   height: 75%;
 }
 .evo_material {
+  max-width: 600px;
   display: inline-block;
   margin: 10px;
 }
@@ -260,6 +261,11 @@ div.monster-info {
 }
 .nested div.closed {
   max-height: 0px;
+}
+
+.grid-item {
+  display: inline-block;
+  margin: 10px;
 }
 
 

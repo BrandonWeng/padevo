@@ -49,8 +49,9 @@ div.monster-info(ng-controller='MainController')
           p Almighty God, Ra Dragon
           
       .navigation    
-          button(onclick='collapseAll()') collapse all
-          button(onclick='showAll()') expand all
+          button(ng-if='#{!gridView}' onclick='collapseAll()') collapse all
+          button(ng-if='#{!gridView}' onclick='showAll()') expand all
+          button(ng-click='switchView('+id+', #{gridView ? false : true})' style="float:right") #{gridView ? "tree view" : "grid view"}
       !{rendered}
 //- doctype html
 //- html(lang='en')

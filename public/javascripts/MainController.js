@@ -41,7 +41,7 @@ var MainAppController;
             })
                 .on("select2:select", (e) => {
                 $scope.formData = { monster_id: parseInt(e.params.data.text) };
-                window.location = '#!/monster?id=' + $scope.formData.monster_id;
+                window.location = '#!/monster?id=' + $scope.formData.monster_id + '&grid=false';
             })
                 .val($routeParams.id + ' ' + angular.element('.monster-name').text())
                 .trigger('change');
@@ -73,7 +73,7 @@ var MainAppController;
             //////////////////////////////////////////////////
             $scope.getRequest = () => {
                 console.log('DATA', $scope.formData);
-                $location.path('/monster').search('id', $scope.formData.monster_id);
+                $location.path('/monster').search('grid', $scope.formData.grid_view.toString()).search('id', $scope.formData.monster_id);
             };
             ////////////////////////////////////////////////////////////////////
             // match monster by id (note array index not always == monster id)
@@ -90,7 +90,11 @@ var MainAppController;
             // handle image click, perform get request
             ////////////////////////////////////////////
             $scope.imageClick = (idx) => {
-                $scope.formData = { monster_id: idx };
+                $scope.formData = { monster_id: idx, grid_view: false };
+                $scope.getRequest();
+            };
+            $scope.switchView = (idx, view) => {
+                $scope.formData = { monster_id: idx, grid_view: view };
                 $scope.getRequest();
             };
             ///////////////////////////////////////////
@@ -194,9 +198,10 @@ var MainAppController;
         })
             .when('/monster', {
             templateUrl: function (params) {
-                if (params.id) {
+                if (params.id && params.grid) {
+                    console.log(params.id + '/' + params.grid);
                     console.log(params);
-                    return '/monster/' + params.id;
+                    return '/monster/' + params.id + '/' + params.grid;
                 }
             }
         })

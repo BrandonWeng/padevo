@@ -9,6 +9,7 @@ var showAll = () => {
   $('.parent-img').siblings().removeClass('closed');
   $('.evo_material').trigger('cssClassChanged');
 }
+
 $(document).ready(() => {
 
   $(".monster-dropdown").select2({ width: 'resolve' });
