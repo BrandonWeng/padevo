@@ -1,8 +1,7 @@
 from py_data.data import GetData
 from py_data.constants import constants
 import json
-from py_data.DAO import MonsterDAO
-
+from py_data.DAO import MonsterDAO, MonsterNameDAO
 
 class ParseData(object):
     def __init__(self):
@@ -10,6 +9,7 @@ class ParseData(object):
         self.list_monsters = get_data.get_monsters()
         self.list_evolution_materials = get_data.get_evolution_materials()
         self.monsterDAO = MonsterDAO.MonsterDAO()
+        self.monsterNameDAO = MonsterNameDAO.MonsterNameDAO()
 
     def get_us_only_monster(self):
         us_only_monsters = [monster["id"] for monster in self.list_monsters if monster['jp_only'] is False]
@@ -66,3 +66,13 @@ class ParseData(object):
         for monster_id in us_only_monster:
             evo_tree = self.make_evolution_tree(monster_id)
             self.monsterDAO.insert_monsters(evo_tree)
+
+    def refresh_monster_names(self):
+        for monster in self.list_monsters:
+            new_item = {
+                "name" : monster["name"],
+                "_id" : monster["id"]
+            }
+
+            self.monsterNameDAO.insert_monsters(new_item)
+
