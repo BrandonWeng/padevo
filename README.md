@@ -1,4 +1,4 @@
-# [padevo.info]
+# padevo.info
 
 Update: No longer being worked on. 
 
