@@ -1,4 +1,7 @@
-# [padevo.info](http://padevo.info/)
+# [padevo.info]
+
+Update: No longer being worked on. 
+
 
 A simple web application whose goal is to help "Puzzles and Dragons" players by quickly generating a list of materials requried to evole a monster.There's still a lot of work to be done, this is a simple prototype as of now... 
 
